@@ -37,7 +37,7 @@ b = 0
 #print(a/b)
 
 if a > 0 or a/b:
-    print("yesy")
+    print("yes")
 else:
     print("no")
 
