@@ -7,6 +7,7 @@ def add(a, b):
     return a + b
 
 
+
 #직접 실행한 경우
 if __name__ == "__main__":
     print(PI)
