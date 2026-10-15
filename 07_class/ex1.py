@@ -181,6 +181,7 @@ print(d1.species,d2.species)
 # -> 클래스 변수는 클래스명.변수명으로 사용하기
 d1.species="멍멍이"
 
+
 print(d1.species,d2.species)
 print(Dog.species)
 
