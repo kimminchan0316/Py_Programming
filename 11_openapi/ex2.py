@@ -18,6 +18,7 @@ load_dotenv()
 
 # 공공데이터포털 인증키 가져오기
 api_key = os.getenv("DATA_API_KEY")
+print(f"공공데이터포털 인증키: {api_key}")
 
 # 기준일자, 기준시간 가져오기
 now = datetime.now()
@@ -73,16 +74,9 @@ def get_weather_info(SERVICE_KEY, base_date=base_date, base_time=base_time):
         
         # 초단기실황조회 결과 출력
         items = data["response"]["body"]["items"]["item"]
-        
-        #강수형태 :0
-        #습도:55
-        #1시간 강수량: 0.0
-        #동서바람성분 : -0.7
-        #풍량 :131
-        #남쪽바람성분:-0.7
-        #풍속 : 1.2
+
         for item in items:
-            print(f"{WEATHER_CODE[item['category']]}: {item['obsrValue']}")
+            print(f"{WEATHER_CODE[item["category"]]}: {item["obsrValue"]}")
 
     except requests.exceptions.Timeout as e:
         print(f"서버 응답시간 초과: {e}")
@@ -99,6 +93,7 @@ def get_weather_info(SERVICE_KEY, base_date=base_date, base_time=base_time):
 #  - 나이스 교육정보 개방 포털(https://open.neis.go.kr/)
 #  - 교육부에서 제공하는 나이스 교육정보 제공 서비스
 # ===========================================================
+neis_api_key = os.getenv("neis_api_key")
 
 def get_food_info(KEY, sc_code, schul_code, mlsv_ymd=base_date):
     try:
@@ -130,7 +125,8 @@ def get_food_info(KEY, sc_code, schul_code, mlsv_ymd=base_date):
             return
 
         # 급식정보 출력
-
+        print(f"기준일자: {base_date}")
+        print(f"메뉴: {data['mealServiceDietInfo'][1]['row'][0]['DDISH_NM']}")
     
     except requests.exceptions.Timeout as e:
         print(f"서버 응답시간 초과: {e}")
@@ -143,4 +139,4 @@ def get_food_info(KEY, sc_code, schul_code, mlsv_ymd=base_date):
 # 나이스 인증키 가져오기
 
 
-# get_food_info(neis_api_key, sc_code="J10", schul_code="7530560")
+get_food_info(neis_api_key, sc_code="J10", schul_code="7530560")
